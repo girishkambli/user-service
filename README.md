@@ -11,3 +11,24 @@ A simple user service that can 1) find exisiting user, and 2) update user.
 <h5>./mvnw spring-boot:run<h5>
 <h6>Get User url: http://localhost:9001/api/users/{id}, method=GET<h6>
 Update User url: http://localhost:9001/api/users/{id}, method=PUT
+  
+<h4>CURL<h4>
+<h5>Get user<h5>  
+<h6>curl --user girish:g1r15h  http://localhost:9001/api/users/1</h6>
+
+<h5>Update user<h5>  
+<h6>curl -i --user girish:g1r15h -X PUT -H "Content-Type:application/json"  http://localhost:9001/api/users/1 --data-binary @- << EOF</h6>
+  {
+  "address": {
+    "city": "Sydney",
+    "postcode": "2000",
+    "state": "NSW",
+    "street": "5 Market St"
+  },
+  "firstName": "Sean",
+  "gender": "MALE",
+  "id": "1",
+  "lastName": "Matt",
+  "title": "Mr."
+}
+<EOF>  
