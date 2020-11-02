@@ -1,6 +1,6 @@
 # user-service
 
-A simple user service that can 1) find exisiting user, and 2) update user.
+A simple user service that can 1) Find an exisiting user, and 2) Update a user.
 
 <h4>Tools and technologies</h4>
 <h5>SpringBoot 2.0 Framework</h5>
