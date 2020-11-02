@@ -1,0 +1,122 @@
+{
+    "provider": {
+        "name": "user_service"
+    },
+    "consumer": {
+        "name": "user_client"
+    },
+    "interactions": [
+        {
+            "description": "GET REQUEST - OK",
+            "request": {
+                "method": "GET",
+                "path": "/users/1",
+                "headers": {
+                    "Authorization": "Basic Z3Vlc3Q6Z3Vlc3Q="
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json",
+                },
+                "body": {
+                    "address": {
+                        "city": "Sydney",
+                        "postcode": "2000",
+                        "state": "NSW",
+                        "street": "1 Martin Pl"
+                    },
+                    "firstName": "Girish",
+                    "gender": "MALE",
+                    "id": "1",
+                    "lastName": "Kambli",
+                    "title": "Mr."
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "User GET"
+                }
+            ]
+        },
+        {
+            "description": "PUT REQUEST - OK",
+            "request": {
+                "method": "PUT",
+                "path": "/users/1",
+                "headers": {
+                    "Authorization": "Basic Z2lyaXNoOmcxcjE1aA==",
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "address": {
+                        "city": "Sydney",
+                        "postcode": "2000",
+                        "state": "NSW",
+                        "street": "1 Market St"
+                    },
+                    "firstName": "Girish",
+                    "gender": "MALE",
+                    "id": "1",
+                    "lastName": "Kambli",
+                    "title": "Mr."
+                }
+            },
+            "response": {
+                "status": 200
+            },
+            "providerStates": [
+                {
+                    "name": "User PUT"
+                }
+            ]
+        },
+        {
+            "description": "PUT REQUEST - ERROR",
+            "request": {
+                "method": "PUT",
+                "path": "/users/abc",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic Z2lyaXNoOmcxcjE1aA=="
+                },
+                "body": {
+                    "address": {
+                        "city": "Sydney",
+                        "postcode": "2000",
+                        "state": "NSW",
+                        "street": "1 Market St"
+                    },
+                    "firstName": "Girish",
+                    "gender": "MALE",
+                    "id": "abc",
+                    "lastName": "Kambli",
+                    "title": "Mr."
+                }
+            },
+            "response": {
+                "status": 400,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "updateUser.id": "Invalid User Id: abc"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "Invalid User PUT"
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.0"
+        }
+    }
+}
