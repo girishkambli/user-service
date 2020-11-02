@@ -2,6 +2,18 @@
 
 A simple user service that can 1) find exisiting user, and 2) update user.
 
+<h4>Tools and technologies</h4>
+<h5>SpringBoot 2.0 Framework</h5>
+<h5>H2 Database</h5>
+<h5>PACT consumer driven tests</h5>
+<h5>Cucumber Integration tests</h5>
+<h5>JUnit 4</h5>
+<h5>Basic authentication using Spring Security</h5>
+<h5>Hystrix Circuit Breaker</h5>
+<h5>Lombok Java library</h5>
+<h5>Liquibase for DB schema management</h5>
+<h5>Hibernate validator for Bean validation</h5>
+
 <h4>To run contract(pact) tests, integration(cucumber) tests and junit tests:</h4>
 <h5>./mvnw clean verify</h5>
 <h6>PACT files location: pacts/user_client-user_service.json</h6>
