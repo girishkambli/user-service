@@ -18,17 +18,17 @@ Update User url: http://localhost:9001/api/users/{id}, method=PUT
 
 <h5>Update user<h5>  
 <h6>curl -i --user girish:g1r15h -X PUT -H "Content-Type:application/json"  http://localhost:9001/api/users/1 --data-binary @- << EOF</h6>
-  {
-  "address": {
-    "city": "Sydney",
-    "postcode": "2000",
-    "state": "NSW",
-    "street": "5 Market St"
-  },
-  "firstName": "Sean",
-  "gender": "MALE",
-  "id": "1",
-  "lastName": "Matt",
-  "title": "Mr."
-}
-<EOF>  
+ <h6> {
+  <h6> "address": {
+   <h6>  "city": "Sydney",
+   <h6>  "postcode": "2000",
+   <h6>  "state": "NSW",
+   <h6>  "street": "5 Market St"
+  <h6> },
+  <h6> "firstName": "Sean",
+  <h6> "gender": "MALE",
+   <h6>"id": "1",
+   <h6>"lastName": "Matt",
+  <h6> "title": "Mr."
+ <h6>}
+ <h6>EOF </h6>
