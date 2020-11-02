@@ -1,0 +1,13 @@
+{
+  "address": {
+    "city": "Sydney",
+    "postcode": "2000",
+    "state": "NSW",
+    "street": "1 Market St"
+  },
+  "firstName": "Girish",
+  "gender": "MALE",
+  "id": "pqr",
+  "lastName": "Kambli",
+  "title": "Mr."
+}

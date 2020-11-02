@@ -5,12 +5,15 @@ import com.ing.userservice.api.dto.User;
 import com.ing.userservice.core.jpa.entity.AddressEntity;
 import com.ing.userservice.core.jpa.entity.UserEntity;
 import com.ing.userservice.core.jpa.repository.UserRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
@@ -29,17 +32,25 @@ public class UserServiceImpl implements UserService {
                 updateUser(user, userEntity);
                 return user;
             })
-            .orElseThrow(EntityNotFoundException::new);
+            .orElseThrow(() -> new EntityNotFoundException("User Not Found: " + userId));
     }
 
     @Override
     @Transactional
-    public void updateUser(long id, User user) {
+    @HystrixCommand(fallbackMethod = "fallBackUpdateUser")
+    public void updateUser(User user) {
 
         UserEntity userEntity = userRepository.findById(Long.valueOf(user.getId()))
             .orElseThrow(EntityNotFoundException::new);
         updateUserEntity(user, userEntity);
         userRepository.save(userEntity);
+    }
+
+    public void fallBackUpdateUser(User user, Throwable throwable) {
+        log.error("Fallback for updateUser, exception: {}", throwable.getMessage());
+
+        //Throwing wrapped exception just for testing purpose. This method should actually do something useful.
+        throw new RuntimeException(throwable.getMessage(), throwable.getCause());
     }
 
     private void updateUser(User user, UserEntity userEntity) {

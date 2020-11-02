@@ -9,5 +9,5 @@ public interface UserService {
 
     User getUser(long userId);
 
-    void updateUser(long id, User user);
+    void updateUser(User user);
 }

@@ -21,6 +21,9 @@
     <spring-security.version>5.3.4.RELEASE</spring-security.version>
     <spring.version>5.2.8.RELEASE</spring.version>
     <commons-io.version>2.4</commons-io.version>
+    <cucumber.version>1.2.5</cucumber.version>
+    <cukes-rest.version>0.0.34</cukes-rest.version>
+    <spring-cloud.version>Hoxton.M3</spring-cloud.version>
   </properties>
 
   <dependencies>
@@ -35,6 +38,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
     </dependency>
 
     <dependency>
@@ -109,11 +116,6 @@
       <version>${spring-security.version}</version>
     </dependency>
 
-    <!--		<dependency>-->
-    <!--			<groupId>org.springframework.cloud</groupId>-->
-    <!--			<artifactId>spring-cloud-starter-hystrix</artifactId>-->
-    <!--		</dependency>-->
-
     <dependency>
       <groupId>au.com.dius</groupId>
       <artifactId>pact-jvm-provider-junit_2.11</artifactId>
@@ -128,7 +130,50 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-spring</artifactId>
+      <version>1.2.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>lv.ctco.cukes</groupId>
+      <artifactId>cukes-rest</artifactId>
+      <version>${cukes-rest.version}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <resources>
@@ -218,5 +263,12 @@
     </plugins>
   </build>
 
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+  </repositories>
 
 </project>

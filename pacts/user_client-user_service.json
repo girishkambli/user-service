@@ -101,7 +101,7 @@
                     "Content-Type": "application/json"
                 },
                 "body": {
-                    "updateUser.id": "Invalid User Id: abc"
+                    "id": "Invalid User Id: abc"
                 }
             },
             "providerStates": [
