@@ -32,4 +32,4 @@ Feature: Verify PUT user
     And request body from file "data/03_invalid_user_fname.json"
     When the client performs PUT request on "/users/1"
     Then status code is 400
-    And response contains "Invalid first name"
+    And response contains "First name too long"
