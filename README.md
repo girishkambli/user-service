@@ -31,7 +31,8 @@ A simple user service that can
 
  - Data population script: src/main/resources/db/data/insertData.sql
  - Get User url: http://localhost:9001/api/users/{id}, method=GET
- - Update User url: http://localhost:9001/api/users/{id}, method=PUT      
+ - Update User url: http://localhost:9001/api/users/{id}, method=PUT
+ - Logs location: logs
 
 **CURL**  
    Get User:     
