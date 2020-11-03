@@ -1,8 +1,8 @@
 # user-service  
   
 A simple user service that can   
-1) Find an existing user   
-2) Update an user  
+1) Find a user   
+2) Update a user  
 
 ## Tools and technologies
 
