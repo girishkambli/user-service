@@ -6,6 +6,7 @@ import com.ing.userservice.api.dto.User;
 import com.ing.userservice.core.service.UserService;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,15 +43,14 @@ public class UserController {
     }
 
     @GetMapping(path = "users/{id}")
-    public User userDetails(@PathVariable
-    @Pattern(regexp = "[\\d]{1,20}", message = INVALID_USER_ID) String id) {
+    public User userDetails(@PathVariable @Pattern(regexp = "[\\d]{1,20}", message = INVALID_USER_ID) String id,
+        @RequestParam Optional<Boolean> triggerCircuitBreaker) {
 
-        return userService.getUser(Long.parseLong(id));
+        return userService.getUser(Long.parseLong(id), triggerCircuitBreaker.orElse(false));
     }
 
     @PutMapping(path = "users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity updateUser(@PathVariable
-    @Pattern(regexp = "[\\d]{1,20}", message = INVALID_USER_ID) String id,
+    public ResponseEntity updateUser(@PathVariable @Pattern(regexp = "[\\d]{1,20}", message = INVALID_USER_ID) String id,
         @RequestBody @Valid User user) {
 
         userService.updateUser(user);

@@ -33,12 +33,24 @@ public class UserServiceProviderTest {
     public void toGetState() {
     }
 
+    @State("User GET - Not Found")
+    public void toGetStateNotFound() {
+    }
+
+    @State("User GET - Unauthorized")
+    public void toGetStateUnauthorised() {
+    }
+
     @State("User PUT")
     public void toPutState() {
     }
 
     @State("Invalid User PUT")
     public void toInvalidPutState() {
+    }
+
+    @State("PUT User Forbidden")
+    public void toPutStateForbidden() {
     }
 
 }

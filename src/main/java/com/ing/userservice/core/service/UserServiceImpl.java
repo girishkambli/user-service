@@ -1,6 +1,7 @@
 package com.ing.userservice.core.service;
 
 import com.ing.userservice.api.dto.Address;
+import com.ing.userservice.api.dto.Gender;
 import com.ing.userservice.api.dto.User;
 import com.ing.userservice.core.jpa.entity.AddressEntity;
 import com.ing.userservice.core.jpa.entity.UserEntity;
@@ -25,6 +26,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(long userId) {
+        return getUser(userId, false);
+    }
+
+    @Override
+    @HystrixCommand(fallbackMethod = "fallBackGetUser", ignoreExceptions = {
+        EntityNotFoundException.class})
+    public User getUser(long userId, boolean triggerCircuitBreaker) {
+
+        if (triggerCircuitBreaker) {
+            throw new RuntimeException("Simulated error to trigger circuit breaker.");
+        }
 
         return userRepository.findById(userId)
             .map(userEntity -> {
@@ -35,22 +47,30 @@ public class UserServiceImpl implements UserService {
             .orElseThrow(() -> new EntityNotFoundException("User Not Found: " + userId));
     }
 
+    public User fallBackGetUser(long userId, boolean triggerCircuitBreaker, Throwable throwable) {
+
+        log.error("In fallBackGetUser, exception is {}", throwable.getMessage());
+
+        //Dummy user
+        User user = new User();
+        user.setFirstName("Circuit");
+        user.setLastName("Breaker");
+        user.setId("0");
+        user.setTitle("Mr.");
+        user.setGender(Gender.MALE);
+        Address address = new Address();
+        user.setAddress(address);
+        return user;
+    }
+
     @Override
     @Transactional
-    @HystrixCommand(fallbackMethod = "fallBackUpdateUser")
     public void updateUser(User user) {
 
         UserEntity userEntity = userRepository.findById(Long.valueOf(user.getId()))
             .orElseThrow(EntityNotFoundException::new);
         updateUserEntity(user, userEntity);
         userRepository.save(userEntity);
-    }
-
-    public void fallBackUpdateUser(User user, Throwable throwable) {
-        log.error("Fallback for updateUser, exception: {}", throwable.getMessage());
-
-        //Throwing wrapped exception just for testing purpose. This method should actually do something useful.
-        throw new RuntimeException(throwable.getMessage(), throwable.getCause());
     }
 
     private void updateUser(User user, UserEntity userEntity) {

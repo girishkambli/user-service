@@ -27,7 +27,6 @@ public class UserServiceSecurityConfigurerAdapter extends WebSecurityConfigurerA
             .authorizeRequests()
             .antMatchers(HttpMethod.PUT, "/api/users/**").hasAuthority("ADMIN")
             .antMatchers(HttpMethod.GET, "/api/users/**").hasAnyAuthority("ADMIN", "USER")
-            //.anyRequest().authenticated()
             .and()
             .httpBasic();
     }

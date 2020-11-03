@@ -18,7 +18,7 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json"
                 },
                 "body": {
                     "address": {
@@ -37,6 +37,54 @@
             "providerStates": [
                 {
                     "name": "User GET"
+                }
+            ]
+        },
+        {
+            "description": "GET REQUEST - User Not Found",
+            "request": {
+                "method": "GET",
+                "path": "/users/999",
+                "headers": {
+                    "Authorization": "Basic Z3Vlc3Q6Z3Vlc3Q="
+                }
+            },
+            "response": {
+                "status": 404,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "id": "User Not Found: 999"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "User GET - Not Found"
+                }
+            ]
+        },
+        {
+            "description": "GET REQUEST - Unauthorized",
+            "request": {
+                "method": "GET",
+                "path": "/users/1",
+                "headers": {
+                    "Authorization": "Basic =Bogus="
+                }
+            },
+            "response": {
+                "status": 401,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "error": "Unauthorized"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "User GET - Unauthorized"
                 }
             ]
         },
@@ -107,6 +155,44 @@
             "providerStates": [
                 {
                     "name": "Invalid User PUT"
+                }
+            ]
+        },
+        {
+            "description": "PUT REQUEST - Forbidden",
+            "request": {
+                "method": "PUT",
+                "path": "/users/1",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Authorization": "Basic Z3Vlc3Q6Z3Vlc3Q="
+                },
+                "body": {
+                    "address": {
+                        "city": "Sydney",
+                        "postcode": "2000",
+                        "state": "NSW",
+                        "street": "1 Market St"
+                    },
+                    "firstName": "Girish",
+                    "gender": "MALE",
+                    "id": "1",
+                    "lastName": "Kambli",
+                    "title": "Mr."
+                }
+            },
+            "response": {
+                "status": 403,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": {
+                    "error": "Forbidden"
+                }
+            },
+            "providerStates": [
+                {
+                    "name": "PUT User Forbidden"
                 }
             ]
         }
