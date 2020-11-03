@@ -57,3 +57,6 @@ Update User:
      }  
     EOF
 
+Get User(Trigger Circuit Breaker):     
+
+    curl --user guest:guest  http://localhost:9001/api/users/1?triggerCircuitBreaker=true
